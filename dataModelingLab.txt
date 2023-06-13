@@ -1,0 +1,124 @@
+Brainstorm
+email, password, userID, username, recipe, ingredients, instructions, public/private, occasions, grocery lists
+
+Table Ideas
+users, recipes, ingredients, grocery lists, occasions
+
+Relationships
+
+one-to-one
+
+one-to-many
+
+many-to-many
+    recipes to occasions
+    ingredients to recipes
+
+Columns
+    users
+        user_id
+            This will give users unique identifiers
+        username
+            This name is for user experience and how they will be viewed on the software
+        password
+            This will provide security to the user's profile
+    
+    recipe
+        recipe_id
+            unique identifier for recipes
+        ingredients
+            a list of ingredients used in the recipe
+        instructions
+            directions for the recipe
+        user_id
+            connects recipe to owners
+    
+    grocery list
+        grocery_list_id
+            unique identifier for grocery list
+        user_id
+            connects grocery lists to owners
+    
+    occasions
+        occasion_id
+            unique identifier for occasion
+        occasion_name
+            for user experience purposes
+        user_id
+            connects occasion to owners
+    
+    recipe_occaions
+        recipe_occasions_id
+            unique identifier for rows in this Table
+        recipe_id
+            connects row to recipe
+        occasion_id
+            connects row to occasion
+    
+    ingredients_recipes
+        ingredients_recipes_id
+            unique identifier for rows in this Table
+        recipe_id
+            connects row to recipe
+        ingredients_id
+            connects row to ingredients
+    
+    ingredients_grocery_list
+        ingredients_grocery_list_id
+            unique identifier for rows in this Table
+        grocery_list_id
+            connects row to grocery_list
+        ingredients_id
+            connects row to ingredients       
+
+
+-- CREATE TABLE users(
+-- 	user_id SERIAL PRIMARY KEY,
+--   username VARCHAR(45) NOT NULL,
+--   password INT NOT NULL
+-- );
+
+-- CREATE TABLE recipes(
+-- 	recipe_id SERIAL PRIMARY KEY,
+--   user_id INT NOT NULL REFERENCES users(user_id),
+--   recipe_name VARCHAR(45) NOT NULL,
+--   instructions TEXT NOT NULL,
+--   public BOOLEAN NOT NULL
+-- );
+
+-- CREATE TABLE occasions(
+--   occasion_id SERIAL PRIMARY KEY,
+--   user_id INT NOT NULL REFERENCES users(user_id),
+--   occasion_name VARCHAR(45) NOT NULL
+--  );
+ 
+-- CREATE TABLE grocery_list (
+--  	grocery_list_id SERIAL PRIMARY KEY,
+--   grocery_list_name VARCHAR(45) NOT NULL,
+--   user_id INT NOT NULL REFERENCES users(user_id)
+--  );
+ 
+-- CREATE TABLE ingredients (
+--  	ingredients_id SERIAL PRIMARY KEY,
+--   ingredient_name VARCHAR(45) NOT NULL,
+--   ingredient_price FLOAT NOT NULL,
+--   ingredient_description VARCHAR(255)
+--  );
+ 
+-- CREATE TABLE ingredients_grocery_list (
+--  	ingredients_grocery_list_id SERIAL PRIMARY KEY,
+--   grocery_list_id INT NOT NULL REFERENCES grocery_list(grocery_list_id),
+--   ingredients_id INT NOT NULL REFERENCES ingredients(ingredients_id)
+-- );
+ 
+-- CREATE TABLE ingredients_recipes (
+-- 	ingredients_recipes_id SERIAL PRIMARY KEY,
+--   ingredients_id INT NOT NULL REFERENCES ingredients(ingredients_id),
+--   recipe_id INT NOT NULL REFERENCES recipes(recipe_id)
+-- );
+
+-- CREATE TABLE recipes_occasions (
+-- 	recipes_occasions_id SERIAL PRIMARY KEY,
+--   recipe_id INT NOT NULL REFERENCES recipes(recipe_id),
+--   occasion_id INT NOT NULL REFERENCES occasions(occasion_id)
+-- );
